@@ -9,8 +9,8 @@
 #include <WiFiUdp.h>
 
 // 設定WIFI
-const char* ssid     = "rock";
-const char* password = "bxBSDKtGgpx6pHfmGEaV3ZYvyHWsaTz7";
+const char* ssid     = "";
+const char* password = "";
 
 // 設定網路時間
 WiFiUDP ntpUDP;
