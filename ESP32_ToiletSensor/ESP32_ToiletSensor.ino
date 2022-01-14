@@ -9,8 +9,8 @@
 #include <WiFiUdp.h>
 
 // 設定WIFI
-const char* ssid     = "ssid";
-const char* password = "password";
+const char* ssid     = "rock";
+const char* password = "bxBSDKtGgpx6pHfmGEaV3ZYvyHWsaTz7";
 
 // 設定網路時間
 WiFiUDP ntpUDP;
@@ -84,6 +84,7 @@ void setup() {
 
   display.display();                  // 要有這行才會把文字顯示出來
   Serial.println("");
+  digitalWrite(relay, LOW);
   delay(3000); // 停1秒
 }
 
@@ -130,9 +131,8 @@ void loop() {
   }
 
   // 設定繼電器
-  int intRelay = digitalRead(relay);
   if (flHumidity > 70) {
-    if (delayRelay1 >= 5  || intRelay == HIGH) {
+    if (delayRelay1 >= 5  || relay == HIGH) {
       digitalWrite(relay, LOW);
       relayStatus += "FAN :  ON";
       delayRelay1 = 0;
@@ -143,17 +143,17 @@ void loop() {
     }
   }
   else {
-    if (delayRelay1 <= -8  || intRelay == LOW) {
+    if (delayRelay1 <= -8  || relay == LOW) {
       digitalWrite(relay, LOW);
       relayStatus += "FAN : OFF";
       delayRelay1 = 0;
     }
     else {
-      relayStatus += ( times ? "FAN :    " : "FAN : OFF");
+      relayStatus += ( times ? "FAN :    " : "FAN :  NO");
       delayRelay1--;
     }
   }
-  showMsg(relayStatus);
+  showMsg(relayStatus+String("")+delayRelay1);
 
   //輸出結果
   display.display();   // 要有這行才會把文字顯示出來
